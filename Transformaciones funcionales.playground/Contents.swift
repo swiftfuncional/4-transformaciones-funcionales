@@ -4,10 +4,11 @@ for db in UserConsumer.databases {
 	userDatabase.append(contentsOf: db)
 }
 
-let hosts: [String?] = userDatabase
+let hosts: [String] = userDatabase
 	.map { ($0["email"] as? String)?.components(separatedBy: "@").last }
 	.filter { (optionalHost) -> Bool in
-		optionalHost != nil }
+		optionalHost != nil
+	}.map { $0! }
 
 typealias  HostInfo = (count: Int, age: Int)
 
