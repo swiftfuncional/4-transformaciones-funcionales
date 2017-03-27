@@ -12,9 +12,6 @@ let hosts: [String] = userDatabase
 	.map(getHost)
 	.filter { $0 != nil }
 	.map { $0! }
-	.reduce([]) { accumulator, host in
-		accumulator + (accumulator.contains(host) ? [] : [host])
-	}
 
 typealias  HostInfo = (count: Int, age: Int)
 
