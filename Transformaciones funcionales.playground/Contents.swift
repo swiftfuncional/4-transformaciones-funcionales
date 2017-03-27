@@ -21,22 +21,19 @@ typealias  HostInfo = (count: Int, age: Int)
 
 func hostInfo(db: JsonArray) -> (String) -> HostInfo {
 	return { host in
-		var count = 0
-		var age = 0
 
-		for user in db {
-			if let email = user["email"] as? String,
+		let result = db.reduce(HostInfo(count: 0, age: 0)) { accumulator, user in
+			guard let email = user["email"] as? String,
 				let userHost = email.components(separatedBy: "@").last,
-				let userAge = user["age"] as? Int,
-				userHost == host {
+				let userAge = user["age"] as? Int, userHost == host else {
 
-				count += 1
-				age += userAge
+					return accumulator
 			}
 
+			return (accumulator.count + 1, accumulator.age + userAge)
 		}
 
-		return HostInfo(count: count, age: age/count)
+		return HostInfo(count: result.count, age: result.age/result.count)
 	}
 }
 
