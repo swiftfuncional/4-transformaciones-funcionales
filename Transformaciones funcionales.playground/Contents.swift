@@ -33,5 +33,18 @@ func hostInfo(db: JsonArray, host: String) -> HostInfo {
 
 	}
 
-	return HostInfo(count: count, age: age/count) 
+	return HostInfo(count: count, age: age/count)
+}
+
+var hostsInfo = [HostInfo]()
+
+for host in hosts {
+	hostsInfo.append(hostInfo(db: userDatabase, host: host))
+}
+
+for i in 0..<hosts.count {
+	print("Host: \(hosts[i])")
+	print("    - Count: \(hostsInfo[i].count) users")
+	print("    - Average age: \(hostsInfo[i].age) years old")
+
 }
