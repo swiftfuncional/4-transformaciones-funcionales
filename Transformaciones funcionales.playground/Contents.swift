@@ -15,7 +15,9 @@ for user in userDatabase {
 	}
 }
 
-func hostInfo(db: JsonArray, host: String) -> (Int, Int) {
+typealias  HostInfo = (count: Int, age: Int)
+
+func hostInfo(db: JsonArray, host: String) -> HostInfo {
 	var count = 0
 	var age = 0
 
@@ -31,5 +33,5 @@ func hostInfo(db: JsonArray, host: String) -> (Int, Int) {
 
 	}
 
-	return (count, age/count)
+	return HostInfo(count: count, age: age/count) 
 }
