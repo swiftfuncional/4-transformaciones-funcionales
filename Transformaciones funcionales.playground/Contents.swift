@@ -4,14 +4,12 @@ for db in UserConsumer.databases {
 	userDatabase.append(contentsOf: db)
 }
 
-var hosts = [String]()
-
-for user in userDatabase {
+let hosts: [String?] = userDatabase.map { user in
 	if let email = user["email"] as? String,
-		let host = email.components(separatedBy: "@").last,
-		!hosts.contains(host) {
-
-		hosts.append(host)
+		let host = email.components(separatedBy: "@").last {
+		return host
+	} else {
+		return nil
 	}
 }
 
