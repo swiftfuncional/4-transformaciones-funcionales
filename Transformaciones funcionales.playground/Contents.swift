@@ -14,3 +14,22 @@ for user in userDatabase {
 		hosts.append(host)
 	}
 }
+
+func hostInfo(db: JsonArray, host: String) -> (Int, Int) {
+	var count = 0
+	var age = 0
+
+	for user in db {
+		if let email = user["email"] as? String,
+			let userHost = email.components(separatedBy: "@").last,
+			let userAge = user["age"] as? Int,
+			userHost == host {
+
+			count += 1
+			age += userAge
+		}
+
+	}
+
+	return (count, age/count)
+}
