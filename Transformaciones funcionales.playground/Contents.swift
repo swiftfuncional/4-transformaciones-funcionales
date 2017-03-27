@@ -6,6 +6,8 @@ for db in UserConsumer.databases {
 
 let hosts: [String?] = userDatabase
 	.map { ($0["email"] as? String)?.components(separatedBy: "@").last }
+	.filter { (optionalHost) -> Bool in
+		optionalHost != nil }
 
 typealias  HostInfo = (count: Int, age: Int)
 
