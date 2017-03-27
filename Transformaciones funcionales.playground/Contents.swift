@@ -4,8 +4,12 @@ for db in UserConsumer.databases {
 	userDatabase.append(contentsOf: db)
 }
 
+func getHost(user: JsonObject) -> String? {
+	return (user["email"] as? String)?.components(separatedBy: "@").last
+}
+
 let hosts: [String] = userDatabase
-	.map { ($0["email"] as? String)?.components(separatedBy: "@").last }
+	.map(getHost)
 	.filter { $0 != nil }
 	.map { $0! }
 
@@ -23,8 +27,7 @@ func hostInfo(db: JsonArray) -> (String) -> HostInfo {
 	return { host in
 
 		let result = db.reduce(HostInfo(count: 0, age: 0)) { accumulator, user in
-			guard let email = user["email"] as? String,
-				let userHost = email.components(separatedBy: "@").last,
+			guard let userHost = getHost(user: user),
 				let userAge = user["age"] as? Int, userHost == host else {
 
 					return accumulator
