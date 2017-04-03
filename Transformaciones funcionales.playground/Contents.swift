@@ -1,8 +1,4 @@
-var userDatabase = JsonArray()
-
-for db in UserConsumer.databases {
-	userDatabase.append(contentsOf: db)
-}
+let userDatabase = UserConsumer.databases.flatMap { $0 }
 
 func getHost(user: JsonObject) -> String? {
 	return (user["email"] as? String)?.components(separatedBy: "@").last
