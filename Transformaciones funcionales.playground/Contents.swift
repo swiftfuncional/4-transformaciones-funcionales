@@ -9,9 +9,7 @@ func getHost(user: JsonObject) -> String? {
 }
 
 let hosts: [String] = userDatabase
-	.map(getHost)
-	.filter { $0 != nil }
-	.map { $0! }
+	.flatMap(getHost)
 	.unique()
 
 typealias  HostInfo = (count: Int, age: Int)
