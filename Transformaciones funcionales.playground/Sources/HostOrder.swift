@@ -2,6 +2,9 @@ public enum HostOrder {
 	
 	case Age, Count, Name
 
-	public var sort: ((String, HostInfo), (String, HostInfo)) -> Bool {
+	public typealias Host = (host: String, info: HostInfo)
+	public typealias Order = (Host, Host) -> Bool
+
+	public var sort: Order {
 	}
 }
