@@ -16,3 +16,5 @@ public enum HostOrder {
 		}
 	}
 }
+
+public typealias HostInfo = (count: Int, age: Int)

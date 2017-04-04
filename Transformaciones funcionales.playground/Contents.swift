@@ -8,8 +8,6 @@ let hosts: [String] = userDatabase
 	.flatMap(getHost)
 	.unique()
 
-typealias  HostInfo = (count: Int, age: Int)
-
 func hostInfo(db: JsonArray) -> (String) -> HostInfo {
 	return { host in
 
