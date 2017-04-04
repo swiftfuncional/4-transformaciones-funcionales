@@ -31,9 +31,8 @@ let hostsInfo = hosts.map(hostInfo(db: userDatabase))
 
 let result = zip(hosts, hostsInfo)
 
-for (host, info) in result {
+result.forEach { host, info in
 	print("Host: \(host)")
 	print("    - Count: \(info.count) users")
 	print("    - Average age: \(info.age) years old")
-
 }
