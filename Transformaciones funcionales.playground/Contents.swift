@@ -29,8 +29,10 @@ let hostsInfo = hosts.map(hostInfo(db: userDatabase))
 
 zip(hosts, hostsInfo)
 	.sorted(by: HostOrder.Name.sort)
-	.forEach { host, info in
-	print("Host: \(host)")
-	print("    - Count: \(info.count) users")
-	print("    - Average age: \(info.age) years old")
-}
+    .forEach {
+        let (host, info) = $0
+        
+        print("Host: \(host)")
+        print("    - Count: \(info.count) users")
+        print("    - Average age: \(info.age) years old")
+    }
